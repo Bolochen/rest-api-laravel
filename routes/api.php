@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\AuthenticationController;
 
@@ -29,6 +30,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/posts', [PostController::class, 'store']);
     Route::patch('/posts/{id}', [PostController::class, 'update'])->middleware(('pemilik-postingan'));
     Route::delete('/posts/{id}', [PostController::class, 'destroy'])->middleware(('pemilik-postingan'));
+
+    Route::post('/comment', [CommentController::class, 'store']);
 });
 
 Route::get('/posts', [PostController::class, 'index']);
