@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,6 @@ class CommentController extends Controller
 
         $comment = Comment::create($request->all());
 
-        return response()->json($comment);
+        return new CommentResource($comment->loadMissing(['commentator:id,username']));
     }
 }
