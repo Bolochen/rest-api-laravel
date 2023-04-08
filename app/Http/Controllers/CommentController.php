@@ -33,4 +33,13 @@ class CommentController extends Controller
 
         return new CommentResource($comment->loadMissing(['commentator:id,username']));
     }
+
+    public function destroy($id)
+    {
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+
+
+        return new CommentResource($comment->loadMissing(['commentator:id,username']));
+    }
 }
